@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplements</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Health Planner</strong></li>
+        </ul>
+        <ul>
+            <li><a href="index.html">Daily Planner</a></li>
+            <li><a href="nutrition.html">Nutrition</a></li>
+            <li><a href="supplements.html">Supplements</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <h2>Supplements</h2>
+        <p>Track and explore your supplement usage.</p>
+    </main>
+</body>
+</html>
