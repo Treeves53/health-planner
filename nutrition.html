@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: #333;
+        }
+        .menu-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .menu-table th, .menu-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Health Planner</strong></li>
+        </ul>
+        <ul>
+            <li><a href="index.html">Daily Planner</a></li>
+            <li><a href="nutrition.html">Nutrition</a></li>
+            <li><a href="supplements.html">Supplements</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <hgroup>
+            <h2>Nutrition</h2>
+            <h3>Plan your meals for the week</h3>
+        </hgroup>
+        <table class="menu-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Meal</th>
+                    <th>Recipe</th>
+                </tr>
+            </thead>
+            <tbody id="menu-body">
+                <tr>
+                    <td>Monday</td>
+                    <td>Breakfast</td>
+                    <td contenteditable="true">Oatmeal with Fruits</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer class="container">
+        <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+    </footer>
+</body>
+</html>

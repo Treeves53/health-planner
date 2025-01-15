@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Planner - Daily Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #333;
+        }
+
+        .planner-table th,
+        .planner-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .planner-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70vh;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .chat-log {
+            overflow-y: auto;
+            flex-grow: 1;
+            margin-bottom: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Health Planner</strong></li>
+        </ul>
+        <ul>
+            <li><a href="index.html">Daily Planner</a></li>
+            <li><a href="nutrition.html">Nutrition</a></li>
+            <li><a href="supplements.html">Supplements</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="history.html">History</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section>
+            <hgroup>
+                <h2>Daily Planner</h2>
+                <h3>Plan your day effectively!</h3>
+            </hgroup>
+            <table class="planner-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Activity</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="planner-body">
+                    <tr>
+                        <td contenteditable="true">6:00 AM</td>
+                        <td contenteditable="true">Morning Walk</td>
+                        <td>Exercise</td>
+                        <td><button onclick="deleteRow(this)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <hgroup>
+                <h2>AI Health Assistant</h2>
+                <h3>Manage your planner with the chatbox below</h3>
+            </hgroup>
+            <div class="chat-container">
+                <div class="chat-log" id="chat-log"></div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="E.g., Add 8:00 AM Yoga to Exercise">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container">
+        <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+    </footer>
+
+    <script>
+        const plannerBody = document.getElementById('planner-body');
+        const chatLog = document.getElementById('chat-log');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            plannerBody.removeChild(row);
+        }
+
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = `${sender}: ${message}`;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function processChatMessage(message) {
+            const [command, ...rest] = message.split(' ');
+            if (command.toLowerCase() === 'add') {
+                const [time, ...activityParts] = rest;
+                const activityAndCategory = activityParts.join(' ').split(' to ');
+                const activity = activityAndCategory[0];
+                const category = activityAndCategory[1] || 'General';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td contenteditable="true">${time}</td>
+                    <td contenteditable="true">${activity}</td>
+                    <td>${category}</td>
+                    <td><button onclick="deleteRow(this)">Delete</button></td>
+                `;
+                plannerBody.appendChild(row);
+
+                addMessage('AI', `Added: ${activity} at ${time} under ${category}`);
+            } else {
+                addMessage('AI', 'I didn’t understand that. Try: "Add 8:00 AM Yoga to Exercise".');
+            }
+        }
+
+        sendBtn.addEventListener('click', () => {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;
+
+            addMessage('You', userMessage);
+            userInput.value = '';
+            processChatMessage(userMessage);
+        });
+    </script>
+</body>
+
+</html>
